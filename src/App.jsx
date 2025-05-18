@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import DataBarang from "./pages/DataBarang";
 import DetailBarang from "./pages/DetailBarang";
 import KategoriList from "./pages/KategoriList";
 import MainLayout from "./layouts/MainLayout";
@@ -9,7 +9,7 @@ import FormTambahBarang from "./pages/FormTambahBarang";
 import FormTambahKategori from "./pages/FormTambahKategori";
 import FormTambahPeminjaman from "./pages/FormTambahPeminjaman";
 import FormEditBarang from "./pages/FormEditBarang";
-import DashboardRingkasan from "./pages/DashboardRingkasan";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           path="/"
           element={
             <MainLayout>
-              <DashboardRingkasan />
+              <Dashboard />
             </MainLayout>
           }
         />
@@ -27,7 +27,7 @@ function App() {
           path="/barang"
           element={
             <MainLayout>
-              <Dashboard />
+              <DataBarang />
             </MainLayout>
           }
         />
