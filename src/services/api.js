@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const API_BASE_URL = "http://localhost:3000/api";
 
 export const updateBarang = async (id, data) => {
@@ -11,6 +12,7 @@ export const updateBarang = async (id, data) => {
     throw error;
   }
 };
+
 
 export const deleteBarang = async (id) => {
   try {
@@ -31,6 +33,8 @@ export const getAllBarang = async () => {
     throw error;
   }
 };
+
+
 
 export const getBarangById = async (id) => {
   try {
@@ -70,6 +74,16 @@ export const getAllPeminjaman = async () => {
     return response.data;
   } catch (error) {
     console.error("Error mengambil data peminjaman:", error);
+    throw error;
+  }
+};
+
+export const createPeminjaman = async (data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/peminjaman`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error menambah peminjaman:", error);
     throw error;
   }
 };

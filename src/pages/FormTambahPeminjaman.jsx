@@ -3,7 +3,7 @@ import FormField from "../components/molecules/FormField";
 import Button from "../components/atoms/Button";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { getAllBarang } from "../services/api";
+import { getAllBarang, createPeminjaman } from "../services/api";
 
 export default function FormTambahPeminjaman() {
   const [form, setForm] = useState({
@@ -35,12 +35,12 @@ export default function FormTambahPeminjaman() {
     };
 
     try {
-      await axios.post("http://localhost:3000/api/peminjaman", payload);
+      await createPeminjaman(payload);
       alert("Peminjaman berhasil ditambahkan!");
       navigate("/peminjaman");
     } catch (err) {
       console.error("Error:", err.response?.data || err.message);
-      alert("Gagal tambah peminjaman.");
+      alert(err.response?.data?.message || "Gagal tambah peminjaman.");
     }
   };
 

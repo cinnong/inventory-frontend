@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { getAllBarang, updateBarang, deleteBarang, getAllKategori } from "../services/api";
+import { getAllBarang, deleteBarang, getAllKategori } from "../services/api";
+
 import {
   Card,
   CardBody,
   Typography,
-  Spinner,
   Button,
   Alert,
 } from "@material-tailwind/react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Table from "../components/organisms/Table";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
@@ -17,6 +16,12 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState(null);
   const navigate = useNavigate();
+  const [kategori, setKategori] = useState([]);
+
+  const getKategoriNama = (id) => {
+    const found = kategori.find((k) => k.id === id);
+    return found ? found.nama : "Tidak diketahui";
+  };
 
   const handleDelete = async (id) => {
     if (window.confirm('Apakah Anda yakin ingin menghapus barang ini?')) {
@@ -43,26 +48,28 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    getAllBarang()
-      .then((data) => {
-        setBarang(data);
+    const fetchData = async () => {
+      try {
+        const [barangData, kategoriData] = await Promise.all([
+          getAllBarang(),
+          getAllKategori()
+        ]);
+        setBarang(barangData);
+        setKategori(kategoriData);
+      } catch (error) {
+        console.error("Gagal memuat data:", error);
+      } finally {
         setLoading(false);
-      })
-      .catch(() => setLoading(false));
+      }
+    };
+  
+    fetchData();
   }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Spinner className="h-12 w-12" color="blue" />
-      </div>
-    );
-  }
 
   return (
     <div className="p-6">
       <Typography variant="h4" color="blue-gray" className="mb-4">
-        Dashboard Barang
+        Daftar Barang
       </Typography>
 
       {alert && (
@@ -107,7 +114,7 @@ export default function Dashboard() {
                     <td className="px-4 py-2">{index + 1}</td>
                     <td className="px-4 py-2">{item.id}</td>
                     <td className="px-4 py-2">{item.nama}</td>
-                    <td className="px-4 py-2">{item.kategori_id}</td>
+                    <td className="px-4 py-2">{getKategoriNama(item.kategori_id)}</td>
                     <td className="px-4 py-2">{item.stok}</td>
                     <td className="px-4 py-2">
                       <div className="flex gap-2">

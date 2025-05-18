@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getBarangById, updateBarang } from "../services/api";
+import { getBarangById, updateBarang, getAllKategori } from "../services/api";
 import {
   Card,
   CardBody,
@@ -13,41 +13,18 @@ import {
 export default function FormEditBarang() {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [barang, setBarang] = useState({
     nama: "",
     kategori_id: "",
     stok: "",
   });
-  const [kategori, setKategori] = useState([]);
 
-  useEffect(() => {
-    // Fetch kategori untuk dropdown
-    const fetchKategori = async () => {
-      try {
-        const data = await getAllKategori();
-        const kategoriMap = data.reduce((acc, kategori) => {
-          acc[kategori.id] = kategori;
-          return acc;
-        }, {});
-        setKategori(data);
-        
-        // Jika barang sudah ada, set nama kategori
-        if (barang.id && barang.kategori_id) {
-          const selectedKategori = kategoriMap[barang.kategori_id];
-          setBarang(prev => ({
-            ...prev,
-            kategori: selectedKategori
-          }));
-        }
-      } catch (error) {
-        console.error("Error mengambil kategori:", error);
-      }
-    };
-    fetchKategori();
-  }, [barang.id, barang.kategori_id]);
+  const [kategori, setKategori] = useState([]);
   const [loading, setLoading] = useState(true);
   const [alert, setAlert] = useState(null);
 
+  // Ambil data barang berdasarkan ID
   useEffect(() => {
     const fetchBarang = async () => {
       try {
@@ -65,6 +42,19 @@ export default function FormEditBarang() {
     fetchBarang();
   }, [id]);
 
+  // Ambil data kategori
+  useEffect(() => {
+    const fetchKategori = async () => {
+      try {
+        const data = await getAllKategori();
+        setKategori(data);
+      } catch (error) {
+        console.error("Error mengambil kategori:", error);
+      }
+    };
+    fetchKategori();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBarang((prev) => ({
@@ -81,7 +71,7 @@ export default function FormEditBarang() {
         type: "success",
         message: "Barang berhasil diperbarui",
       });
-      navigate("/dashboard");
+      navigate("/barang");
     } catch (error) {
       setAlert({
         type: "error",
@@ -160,7 +150,7 @@ export default function FormEditBarang() {
                 type="button"
                 variant="outlined"
                 color="gray"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/barang")}
               >
                 Batal
               </Button>

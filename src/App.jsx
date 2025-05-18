@@ -9,6 +9,7 @@ import FormTambahBarang from "./pages/FormTambahBarang";
 import FormTambahKategori from "./pages/FormTambahKategori";
 import FormTambahPeminjaman from "./pages/FormTambahPeminjaman";
 import FormEditBarang from "./pages/FormEditBarang";
+import DashboardRingkasan from "./pages/DashboardRingkasan";
 
 function App() {
   return (
@@ -16,6 +17,14 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <MainLayout>
+              <DashboardRingkasan />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/barang"
           element={
             <MainLayout>
               <Dashboard />

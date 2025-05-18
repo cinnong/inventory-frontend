@@ -191,11 +191,6 @@ export default function KategoriList() {
           </table>
         </CardBody>
       </Card>
-      <Link to="/" className="inline-block mt-4">
-        <Typography className="text-blue-600 hover:underline">
-          ← Kembali ke Dashboard
-        </Typography>
-      </Link>
     </div>
   );
 }

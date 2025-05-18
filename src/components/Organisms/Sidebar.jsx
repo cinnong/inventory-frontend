@@ -9,7 +9,8 @@ import {
 import { Link, useLocation } from "react-router-dom";
 
 const menu = [
-  { label: "Barang", icon: CubeIcon, path: "/" },
+  { label: "Dashboard", icon: ChartBarIcon, path: "/" },
+  { label: "Barang", icon: CubeIcon, path: "/barang" },
   { label: "Kategori", icon: TagIcon, path: "/kategori" },
   { label: "Peminjaman", icon: ClipboardDocumentListIcon, path: "/peminjaman" },
   { label: "Laporan", icon: ChartBarIcon, path: "/laporan" },

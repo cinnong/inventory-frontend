@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllPeminjaman, updatePeminjaman } from "../services/api";
-import { Card, CardBody, Typography, Spinner, Alert } from "@material-tailwind/react";
+import { Card, CardBody, Typography, Spinner, Alert, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import { PencilIcon } from "@heroicons/react/24/outline";
 
@@ -105,9 +105,11 @@ export default function PeminjamanList() {
             Total Peminjaman: {data.length}
           </Typography>
         </div>
-        <Link to="/peminjaman/tambah" className="inline-flex items-center">
-          <span className="mr-2">+</span>
-          <span>Tambah Peminjaman</span>
+        <Link to="/peminjaman/tambah">
+          <Button variant="gradient" color="black">
+            <span className="mr-2">+</span>
+            Tambah Peminjaman
+          </Button>
         </Link>
       </div>
 
