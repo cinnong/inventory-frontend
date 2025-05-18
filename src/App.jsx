@@ -1,10 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import DetailBarang from "./pages/DetailBarang"; // akan kita buat nanti
+import DetailBarang from "./pages/DetailBarang";
 import KategoriList from "./pages/KategoriList";
 import MainLayout from "./layouts/MainLayout";
 import PeminjamanList from "./pages/PeminjamanList";
 import LaporanPeminjaman from "./pages/LaporanPeminjaman";
+import FormTambahBarang from "./pages/FormTambahBarang";
+import FormTambahKategori from "./pages/FormTambahKategori";
+import FormTambahPeminjaman from "./pages/FormTambahPeminjaman";
+import FormEditBarang from "./pages/FormEditBarang";
 
 function App() {
   return (
@@ -23,6 +27,14 @@ function App() {
           element={
             <MainLayout>
               <DetailBarang />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/barang/edit/:id"
+          element={
+            <MainLayout>
+              <FormEditBarang />
             </MainLayout>
           }
         />
@@ -47,6 +59,33 @@ function App() {
           element={
             <MainLayout>
               <LaporanPeminjaman />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/barang/tambah"
+          element={
+            <MainLayout>
+              <FormTambahBarang />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/kategori/tambah"
+          element={
+            <MainLayout>
+              <FormTambahKategori />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/peminjaman/tambah"
+          element={
+            <MainLayout>
+              <FormTambahPeminjaman />
             </MainLayout>
           }
         />

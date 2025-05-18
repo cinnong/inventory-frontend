@@ -1,4 +1,4 @@
-import Sidebar from "../components/Organisms/Sidebar";
+import Sidebar from "../components/organisms/Sidebar";
 
 export default function MainLayout({ children }) {
   return (

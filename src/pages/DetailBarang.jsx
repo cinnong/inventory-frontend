@@ -59,7 +59,7 @@ export default function DetailBarang() {
             <strong>Nama:</strong> {barang.nama}
           </Typography>
           <Typography>
-            <strong>Kategori:</strong> {barang.kategori}
+            <strong>Kategori ID:</strong> {barang.kategori_id}
           </Typography>
           <Typography>
             <strong>Stok:</strong> {barang.stok}
